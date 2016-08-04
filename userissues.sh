@@ -4,7 +4,7 @@
 #List users of Repository with open issues (Naughty List) 
 #curl -k -v https://api.github.com/repos/docker/docker/issues/events >> txt.sh
 #curl 'https://api.github.com/repos/docker/docker/issues/events' | grep login >> naughty.txt
-curl -s -X GET https://api.github.com/repos/$1/$2/issues/events |grep -Po '(?<="login": ")[^"]*' >> naughty.txt
+curl -s -X GET https://api.github.com/repos/$1/$2/issues/events |grep -Po '(?<="login": ")[^"]*' >> naughty_$2.txt
 
 #Push updated list to GitHub
 git add .
