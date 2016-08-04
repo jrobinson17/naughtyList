@@ -7,7 +7,7 @@
 curl -s -X GET https://api.github.com/repos/$1/$2/issues/events |grep -Po '(?<="login": ")[^"]*' >> naughty_$2.txt
 
 #Push updated list to GitHub & Gist
-gist naughty.txt > naughty.txt
+gist naughty_$2.txt >> naughty_$2.txt
 git add .
 git commit -m 'changes'
 git push origin master
