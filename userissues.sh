@@ -6,10 +6,13 @@
 #curl 'https://api.github.com/repos/docker/docker/issues/events' | grep login >> naughty.txt
 curl -s -X GET https://api.github.com/repos/$1/$2/issues/events |grep -Po '(?<="login": ")[^"]*' >> naughty_$2.txt
 
-#Push updated list to GitHub
+#Push updated list to GitHub & Gist
+gist naughty.txt > naughty.txt
 git add .
 git commit -m 'changes'
 git push origin master
+#gist naughty.txt > naughty.txt
+
 #curl -H -d '{  "name": "Hello-World",  "description": "This is your first repository",  "homepage": "https://github.com",  "private": false,  "has_issues": true,  "has_wiki": true,  "has_downloads": true } ' https://api.github.com/user/repos
 
 
