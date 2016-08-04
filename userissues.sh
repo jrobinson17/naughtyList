@@ -1,11 +1,9 @@
 
 #!/bin/bash
 
-#List open issues (In Current Repo)
-curl -k -v https://api.github.com/repos/docker/docker/issues/events >> txt.sh
+#List users of Repository with open issues (Naughty List) 
+#curl -k -v https://api.github.com/repos/docker/docker/issues/events >> txt.sh
+#curl 'https://api.github.com/repos/docker/docker/issues/events' | grep login >> naughty.txt
+curl -s -X GET https://api.github.com/repos/docker/docker/issues/events |grep -Po '(?<="login": ")[^"]*' >> naughty.txt
+#curl -H "Content-Type: application/json" -d '{"description": "the description for this gist","public": true,"files": {"naughty.txt": {"content": "String file contents  '@naughty.txt'" }}}' https://api.github.com/gists |grep url
 
-#List users who have open issues
-cat txt.sh |grep "login" >> naughty.txt
-rm -rf txt.sh
-
-curl --data "{"description": "Users with Outstanding Issues",  "public": true, "files": {   "troublemakers.txt": { "content": $(pwd)/naughty.txt } } }  "https://api.github.com/gists
